@@ -12,9 +12,19 @@ A meme that captures how I currently feel about my university studies is ![](htt
 
 
 
-#Project section:#
+# Project section:
 
-##PART A##
+## PART A
 
-Lectures I like:
+
+
+Lecturers I like:
+- **Liza**
+- Lars
+- Rachel
+
+My respected Lecturers:
+1. Lars
+2. *Liza*
+3. Rachel
 
