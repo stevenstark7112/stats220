@@ -19,7 +19,7 @@ A meme that captures how I currently feel about my university studies is ![](htt
 
 
 Lecturers I like:
-- **Liza** [Liza profile] (https://github.com/elb0)
+- [**Liza**](https://github.com/elb0)
 - Lars
 - Rachel
 
