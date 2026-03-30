@@ -1,0 +1,124 @@
+---
+title: My dynamic report
+output: html_fragment
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo=FALSE, message=FALSE, warning=FALSE, error=FALSE)
+library(tidyverse)
+```
+
+```{css}
+
+```
+
+## What's going on with this data?
+
+Tracking lecturers behaviors to explore the differences so that I can recommend Liza better and more appropriately to corresponding students. :)
+
+The truth is to provide more cues for students to allow them to select appropriate lecturers. And with time, I believe that my data will be more precise to release lecturers style, and I will continue to improve my form, such as changing lecturers name from mutiple choice to filled-out blank so that I can add more lecturers to compare and conclude.
+
+## What's my analysis and my role of nature data?
+Specifically, I want to explore interaction between lecturers and students, for example, the times of laugh during the warm-up session. 
+
+Additionally, the number of words as another indicator to describe the amount of knowledge delivered by the lecturers.
+
+In terms of the word oops, this is interesting theme for me, I just want to find out whether it correlate with other characteristics I never thought about.
+
+Finally, teacher-centered or student-centred teaching style is debating in recent years. So, it is very valuable to explore the correlation with other indicators.
+
+```{r }
+
+
+# Part C
+logged_data <- read_csv("https://docs.google.com/spreadsheets/d/e/2PACX-1vQGgYV2JWMizRy0MXamD3Nu_eeU4ONTU8T_ZyooPpthriowaOx9MgNU7qXq2HqGUAZGirrEVd0PbPpC/pub?gid=2078826162&single=true&output=csv")
+
+
+
+# Part D
+
+lastest_data <- rename(logged_data, ln = 2, cn = 3, opn = 4, lt = 5, wn = 6)
+
+
+## tidy data
+
+### the mean for oops
+larsoop <- round(mean(lastest_data$opn[1:5]), 0)
+lizaoop <- round(mean(lastest_data$opn[6:10]), 0)
+racheloop <- round(mean(lastest_data$opn[11:15]), 0)
+yaluoop <- round(mean(lastest_data$opn[16:20]), 0)
+oop <- c(larsoop, lizaoop, racheloop, yaluoop)
+
+### the mean for student laugh
+larslaugh <- round(mean(lastest_data$lt[1:5]), 1)
+lizalaugh <- round(mean(lastest_data$lt[6:10]), 1)
+rachellaugh <- round(mean(lastest_data$lt[11:15]), 1)
+yalulaugh <- round(mean(lastest_data$lt[16:20]), 1)
+laugh <- c(larslaugh, lizalaugh, rachellaugh, yalulaugh)
+
+### the mean for words
+larswords <- round(mean(lastest_data$wn[1:5]), 1)
+lizawords <- round(mean(lastest_data$wn[6:10]), 1)
+rachelwords <- round(mean(lastest_data$wn[11:15]), 1)
+yaluwords <- round(mean(lastest_data$wn[16:20]), 1)
+sword <- c(larswords, lizawords, rachelwords, yaluwords)
+
+### Build other vectors
+lname <- c("Lars", "Liza", "Rachel", "Yalu")
+ts <- c(lastest_data$`Teaching style`[1], lastest_data$`Teaching style`[6], lastest_data$`Teaching style`[11], lastest_data$`Teaching style`[16])
+
+llastest_data <- tibble(lname, oop, laugh, sword, ts)
+
+
+## summary values
+winner1 = llastest_data$lname[llastest_data$laugh == max(llastest_data$laugh)]
+paste("The interactive winner is", winner1) %>%
+  print()
+
+
+winner2 = llastest_data$lname[llastest_data$sword == max(llastest_data$sword)]
+paste("The most knowledgable winner is", winner2)%>%
+  print()
+
+```
+
+<img src="https://montreal.citynews.ca/wp-content/blogs.dir/sites/19/2026/03/Maciek-Szczerbowski-left-and-Chris-Lavis-oscars-scaled-e1773783622233-2048x1154.jpg" width="400">
+
+To explain OOPS
+```{r}
+## explore the correlation between oops, and laugh and spoken words
+summary1 <- summary(lm(lt ~ opn, data = lastest_data)) 
+paste("The P-value between number of oops and the times of laugh is", summary1$coefficients[2, 4])
+
+summary2 <- summary(lm(wn ~ opn, data = lastest_data))
+paste("The P-value between number of oops and the times of laugh is", summary2$coefficients[2, 4])
+
+summary3 <- summary(lm(opn ~ `Teaching style`, data = lastest_data))
+paste("The P-value between number of oops and the times of laugh is", summary3$coefficients[2, 4])
+```
+
+
+```{r}
+## two bar chart
+ggplot(data = llastest_data) + geom_bar(aes(x = laugh, fill = ts))
+ggplot(data = llastest_data) + geom_bar(aes(y = sword, fill = ts))
+```
+
+
+
+Conclusion:
+
+The results are reasonable. Interative lecturers take longer time to strengthen interaction (this is why the indicator of spoken words is not abandont) so they tend to use less theoretical and dry content. However, the productivity may be very significant. 
+And on the other hand, lecturers who are interactive are not proven that they simply carry out student-centred pedagogical approaches.
+In terms of OOPS, we can find there is a significant p-value between the number words and OOPS, so this result is like a saying that the more you say, the more mistakes you make; less is more.
+
+
+```{r}
+pets <- c("cat", "dog", "turtle", "rabbit")
+best_pet <- pets[1]
+
+```
+
+The best pet to have is a `r best_pet` of course!
+
+![](https://c.tenor.com/-qBsG1HwR4oAAAAC/tenor.gif)
