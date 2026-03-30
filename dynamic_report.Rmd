@@ -108,9 +108,10 @@ ggplot(data = llastest_data) + geom_bar(aes(y = sword, fill = ts))
 
 Conclusion:
 
-The results are reasonable. Interative lecturers take longer time to strengthen interaction (this is why the indicator of spoken words is not abandont) so they tend to use less theoretical and dry content. However, the productivity may be very significant. 
-And on the other hand, lecturers who are interactive are not proven that they simply carry out student-centred pedagogical approaches.
-In terms of OOPS, we can find there is a significant p-value between the number words and OOPS, so this result is like a saying that the more you say, the more mistakes you make; less is more.
+The results are reasonable. Interactive lecturers take a longer time to strengthen interaction (this is why the indicator of spoken words is not abandoned), so they tend to use less theoretical and dry content. However, the productivity may be very significant. 
+On the other hand, lecturers who are interactive have not proven that they simply carry out student-centred pedagogical approaches.
+In terms of OOPS, we can find that there is a significant p-value between the number words and OOPS. This result is logical. People who speak more often make more mistakes. They also tend to focus more on speaking, so they concentrate less on other things, so that they will make mistakes.
+
 
 
 ```{r}
